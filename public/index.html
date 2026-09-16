@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8fa">
+  <meta name="description" content="Smart Desk — סביבת לימוד חכמה שעוזרת לך להתרכז, צעד קטן בכל פעם.">
+  <title>Smart Desk · מקום להתרכז</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">דלג לתוכן</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Smart Desk — דף הבית"><span class="brand-mark" aria-hidden="true">✳</span><span><strong dir="ltr">smart desk<span class="brand-dot">.</span></strong><small>מקום להתרכז</small></span></a>
+  <nav aria-label="ניווט ראשי"><a href="#workspace" class="nav-active">סביבת הלימוד</a><a href="#how-it-works">איך זה עובד?</a></nav>
+  <span class="header-label"><span class="dot"></span> פחות הסחות. יותר עשייה.</span>
+</header>
+<main id="main">
+  <section class="welcome">
+    <div><span class="eyebrow">השולחן שלך. הקצב שלך.</span><h1>זמן לפנות מקום <span>לריכוז.</span></h1><p>משימה אחת, סביבה קשובה, וצעד קטן קדימה. העוזר שלך כאן כדי לעזור.</p></div>
+    <div class="welcome-note"><span class="little-spark">✧</span><span>לא צריך להספיק הכול.<br><strong>רק להתחיל בדבר אחד.</strong></span></div>
+  </section>
+  <div id="connection-note" class="notice" role="status" hidden></div>
+  <section id="workspace" class="workspace" aria-label="סביבת הלימוד">
+    <div class="primary-column">
+      <section class="card focus-card" aria-labelledby="focus-title">
+        <div class="card-heading"><div class="heading-with-icon"><span class="icon-tile blue">◷</span><div><span class="eyebrow">צעד אחד בכל פעם</span><h2 id="focus-title">הפוקוס שלך עכשיו</h2></div></div><span id="session-status" class="pill">מוכנים להתחיל</span></div>
+        <label for="task">במה נתרכז היום?</label>
+        <input id="task" type="text" maxlength="160" value="להתקדם בפרויקט הסיום" placeholder="למשל: לסכם פרק או לפתור תרגיל" autocomplete="off">
+        <div class="focus-center">
+          <div class="timer-orbit" id="timer-orbit"><div class="timer-inner"><span id="timer" dir="ltr" role="timer" aria-label="זמן שנותר">25:00</span><span id="timer-caption">דקות של זמן לעצמך</span></div></div>
+          <div class="focus-settings"><span class="field-caption" id="duration-label">כמה זמן מתאים לך?</span><div class="duration-options" role="group" aria-labelledby="duration-label"><button data-minutes="15" aria-pressed="false">15 דק׳</button><button data-minutes="25" aria-pressed="true" class="selected">25 דק׳</button><button data-minutes="45" aria-pressed="false">45 דק׳</button></div><p>אפשר לעצור, לנשום ולחזור.<br>ההתקדמות שלך נשארת.</p></div>
+        </div>
+        <div class="timer-controls"><button id="timer-main" class="button primary"><span aria-hidden="true">▶</span> מתחילים להתרכז</button><button id="timer-reset" class="button quiet" aria-label="איפוס הסשן">↺ <span>איפוס</span></button></div>
+        <div id="reset-confirm" class="inline-confirm" hidden><span>לאפס את הטיימר ולהתחיל סשן חדש?</span><button id="reset-yes" class="button small">כן, לאפס</button><button id="reset-no" class="button quiet small">ביטול</button></div>
+        <div class="focus-footer"><span class="dot"></span><span id="focus-footer-text">הטיימר נעצר רק בבחירה שלך</span></div>
+      </section>
+      <section class="card agent-card" aria-labelledby="agent-heading">
+        <div class="card-heading"><div class="heading-with-icon"><span class="icon-tile mint">✧</span><div><span class="eyebrow">קצת עזרה, בדיוק בזמן</span><h2 id="agent-heading">העוזר האישי שלך</h2></div></div><span id="agent-status" class="pill mint-pill">ממתין לזיהוי</span></div>
+        <div id="agent-content" aria-live="polite"><h3 id="agent-title">נפנה מקום למה שחשוב</h3><p id="agent-message">הפעל את המצלמה והצג חפץ מהשולחן. אשלב את הזיהוי עם מצב הלימוד שלך ואציע את הצעד הבא.</p><p id="agent-reason" class="reason" hidden></p></div>
+        <div id="agent-actions" class="agent-actions" hidden><button id="accept-action" class="button primary"></button><button id="dismiss-action" class="button quiet">לא עכשיו</button></div>
+        <div class="agent-bottom"><span id="agent-source">ההחלטות שלך, העזרה שלנו</span><button id="retry-agent" class="text-button" hidden>נסה שוב</button></div>
+      </section>
+    </div>
+    <div class="secondary-column">
+      <section class="card camera-card" aria-labelledby="camera-heading">
+        <div class="card-heading"><div><span class="eyebrow">מבט קטן על סביבת הלימוד</span><h2 id="camera-heading">מה על השולחן?</h2></div><span id="camera-status" class="pill"><span class="dot gray"></span> מצלמה כבויה</span></div>
+        <div class="camera-stage" id="camera-stage">
+          <video id="webcam" autoplay playsinline muted hidden aria-label="תצוגת מצלמה חיה"></video>
+          <canvas id="model-canvas" width="224" height="224" hidden></canvas>
+          <div id="camera-placeholder" class="camera-placeholder">
+            <svg class="desk-art" viewBox="0 0 360 210" fill="none" aria-hidden="true"><ellipse cx="178" cy="175" rx="135" ry="17" fill="#dfeae9"/><rect x="53" y="156" width="254" height="9" rx="4.5" fill="#779795"/><path d="M78 165v24m205-24v24" stroke="#779795" stroke-width="7" stroke-linecap="round"/><rect x="107" y="69" width="133" height="88" rx="9" fill="#abc3d5"/><rect x="115" y="77" width="117" height="70" rx="5" fill="#f5fafb"/><path d="M154 112l12 12 28-28" stroke="#64968a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M95 157h157" stroke="#638596" stroke-width="7" stroke-linecap="round"/><rect x="63" y="135" width="35" height="19" rx="3" fill="#c7d9ce"/><path d="M68 140h26m-26 7h26" stroke="#94b3a8" stroke-width="2"/><rect x="262" y="104" width="23" height="51" rx="8" fill="#bcdbd4"/><rect x="268" y="95" width="11" height="12" rx="3" fill="#82afa3"/><path d="M267 124h13" stroke="#f5fafb" stroke-width="3"/><path d="M75 63v14m-7-7h14m187-25v12m-6-6h12" stroke="#94b5b3" stroke-width="2" stroke-linecap="round"/><circle cx="246" cy="72" r="3" fill="#9bbacb"/></svg>
+            <h3>נכיר את השולחן שלך?</h3><p>הפעל מצלמה כדי לזהות את החפצים<br>ולהתאים את העזרה לרגע הזה.</p>
+          </div>
+          <span class="live-tag" id="live-tag" hidden><span class="dot"></span> זיהוי חי</span>
+        </div>
+        <div id="camera-error" class="error-box" role="alert" hidden></div>
+        <button id="camera-toggle" class="button outline full">הפעלת מצלמה</button>
+        <p class="privacy-note"><span aria-hidden="true">♧</span> התמונות מעובדות בדפדפן. ל־AI נשלחים רק הזיהוי ומצב הלימוד.</p>
+        <div class="prediction-heading"><h3>הזיהוי הנוכחי</h3><span id="prediction-quality">ממתין למצלמה</span></div>
+        <div id="predictions" class="predictions"></div>
+        <p class="confidence-note">רמת הביטחון מתייחסת לזיהוי הנוכחי, לא לדיוק הכולל של המודל.</p>
+      </section>
+      <details class="demo-panel" id="demo-panel"><summary>רוצה לנסות בלי מצלמה? <span>מצב הדגמה</span></summary><div class="demo-body"><p>הדגמה מקומית עם זיהויים מדומים וכללי החלטה לדוגמה. אינה משתמשת במודל המצלמה או ב־Gemini.</p><label class="demo-switch"><input id="demo-enabled" type="checkbox"> הפעלת מצב הדגמה</label><div id="demo-buttons" class="demo-buttons" hidden></div></div></details>
+    </div>
+  </section>
+  <section class="card history-card" aria-labelledby="history-heading"><div class="card-heading"><div class="heading-with-icon"><span class="icon-tile neutral">↗</span><div><span class="eyebrow">הצעדים הקטנים מצטברים</span><h2 id="history-heading">מה קרה בסשן שלך</h2></div></div><span id="history-count" class="subtle">עוד רגע מתחילים</span></div><ol id="history-list" class="history-list"></ol><p id="history-empty" class="empty-state">כאן יופיעו ההחלטות, הפעולות והרגעים שבהם התקדמת.</p></section>
+  <section id="how-it-works" class="how-section"><div><span class="eyebrow">פשוט, ועם מחשבה מאחוריו</span><h2>איך השולחן הופך לחכם?</h2></div><div class="steps"><article><span>01</span><h3>מזהים</h3><p>המודל שאומן ב־Teachable Machine מזהה חפץ בתמונה.</p></article><article><span>02</span><h3>מבינים את ההקשר</h3><p>ה־Agent בוחן את המשימה, הזמן שעבר והפעולות האחרונות.</p></article><article><span>03</span><h3>בוחרים ומתקדמים</h3><p>מתקבלת הצעה מותאמת. אישור שלך מפעיל את הפעולה.</p></article></div></section>
+  <footer class="site-footer"><span dir="ltr">smart desk.</span><p>מרחב קטן לריכוז גדול · פרויקט גמר AI</p><span>נבנה כדי לעזור, לא להפריע.</span></footer>
+</main>
+<div id="toast" class="toast" role="status" hidden></div>
+<noscript><p>כדי להשתמש במצלמה ובטיימר יש להפעיל JavaScript בדפדפן.</p></noscript>
+</body></html>
