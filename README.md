@@ -9,7 +9,6 @@
 - [האתר הפעיל](https://smart-desk-agent-vert.vercel.app/)
 - [מאגר GitHub](https://github.com/oritark/smart-desk-agent)
 
-מדריך ההגשה ותסריט לסרטון של כ־55 שניות: [SUBMISSION-GUIDE.md](SUBMISSION-GUIDE.md).
 
 ## הרעיון
 
